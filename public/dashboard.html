@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>招标助手</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- 顶部用户信息条 -->
+        <div class="top-user-bar">
+            <div class="user-info">
+                <span class="user-avatar">👤</span>
+                <span class="user-name" id="userName">加载中...</span>
+            </div>
+            <button class="btn-logout" onclick="logout()">退出</button>
+        </div>
+
+        <!-- AI背景标题区域 -->
+        <div class="hero-bg">
+            <div class="hero-content">
+                <h1 class="hero-title">🤖 AI招标助手</h1>
+                <p class="hero-subtitle">智能匹配 · 精准推荐 · 高效投标</p>
+            </div>
+        </div>
+
+        <!-- 筛选区域 - 3项一行 -->
+        <div class="filter-card">
+            <div class="filter-row three-col">
+                <select id="filterRegion" onchange="loadTenders()">
+                    <option value="">全部地区</option>
+                    <option value="江苏">江苏</option>
+                    <option value="浙江">浙江</option>
+                    <option value="上海">上海</option>
+                </select>
+                <select id="filterType" onchange="loadTenders()">
+                    <option value="">全部类型</option>
+                    <option value="路面">路面</option>
+                    <option value="桥墩">桥墩</option>
+                    <option value="市政">市政</option>
+                    <option value="桥梁">桥梁</option>
+                </select>
+                <input type="text" id="searchKeyword" placeholder="🔍 搜索..." oninput="debounceSearch()">
+            </div>
+        </div>
+
+        <!-- 状态筛选标签 - 横向滚动 + 多选 -->
+        <div class="status-filter-bar">
+            <div class="status-filter-scroll" id="statusFilterBar">
+                <span class="status-filter-tag active" data-status="" onclick="toggleStatusFilter(this)">全部</span>
+                <span class="status-filter-tag" data-status="新推送" onclick="toggleStatusFilter(this)">🆕 新推送</span>
+                <span class="status-filter-tag" data-status="已查看" onclick="toggleStatusFilter(this)">👁️ 已查看</span>
+                <span class="status-filter-tag" data-status="感兴趣" onclick="toggleStatusFilter(this)">🐻 感兴趣</span>
+                <span class="status-filter-tag" data-status="决定投标" onclick="toggleStatusFilter(this)">📋 决定投标</span>
+                <span class="status-filter-tag" data-status="已投标" onclick="toggleStatusFilter(this)">✅ 已投标</span>
+                <span class="status-filter-tag" data-status="已放弃" onclick="toggleStatusFilter(this)">❌ 已放弃</span>
+            </div>
+        </div>
+
+        <!-- 招标列表 -->
+        <div class="tender-list" id="tenderList">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>加载中...</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
