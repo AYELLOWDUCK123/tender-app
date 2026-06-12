@@ -222,21 +222,21 @@ function createTenderCard(t) {
 
         <!-- 标签区域：地区、类型、匹配度、预算 -->
         <div class="tender-tags">
-            <span class="tender-tag tag-region">📍 ${escHtml(t.region)}</span>
-            <span class="tender-tag tag-type">🏗️ ${escHtml(t.project_type)}</span>
-            <span class="tender-tag tag-match" style="background:${matchColor}20;color:${matchColor};border-color:${matchColor}40;">📊 ${t.match_score}分</span>
-            <span class="tender-tag tag-budget" style="background:${budgetColor}20;color:${budgetColor};border-color:${budgetColor}40;">💰 ${t.budget}万</span>
+            <span class="tender-tag tag-region"><i class="tag-icon" style="background:#667eea"></i>${escHtml(t.region)}</span>
+            <span class="tender-tag tag-type"><i class="tag-icon" style="background:#667eea"></i>${escHtml(t.project_type)}</span>
+            <span class="tender-tag tag-match"><i class="tag-icon" style="background:${matchColor}"></i>${t.match_score}分</span>
+            <span class="tender-tag tag-budget"><i class="tag-icon" style="background:${budgetColor}"></i>${t.budget}万</span>
         </div>
 
         <!-- 标段摘要 -->
         ${t.section_summary ? `
-        <div class="section-summary">📝 ${escHtml(t.section_summary)}</div>
+        <div class="section-summary">${escHtml(t.section_summary)}</div>
         ` : ''}
 
         <!-- 时间信息：一行显示 -->
         <div class="time-info">
             <div class="time-item">
-                <span class="time-label">📅 招标时间：</span>
+                <span class="time-label">招标时间：</span>
                 <span class="time-value">${escHtml(tenderTime)}</span>
             </div>
             ${t.submit_start_date || t.submit_deadline ? `
