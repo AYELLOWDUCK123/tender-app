@@ -110,6 +110,11 @@ app.get('/dashboard', requireAuth, (req, res) => {
 app.post('/api/register', (req, res) => {
   const { username, phone, password, company_name } = req.body;
 
+  // 验证：用户名和手机号至少填一个
+  if (!username && !phone) {
+    return res.json({ success: false, message: '请填写用户名或手机号（至少填一个）' });
+  }
+
   if (!password || password.length < 6) {
     return res.json({ success: false, message: '密码至少6位' });
   }
