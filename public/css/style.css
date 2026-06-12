@@ -121,10 +121,10 @@ body {
 
 /* ========== 状态筛选标签栏 ========== */
 .status-filter-bar {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.95);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
   padding: 8px 0;
   margin: 0 12px;
 }
@@ -151,9 +151,9 @@ body {
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s;
-  background: rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.05);
+  color: #444;
+  border: 1px solid rgba(0,0,0,0.12);
 }
 
 .status-filter-tag:active {
