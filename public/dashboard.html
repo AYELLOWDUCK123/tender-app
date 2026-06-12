@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>招标助手</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icon.css">
 </head>
 <body>
     <div class="mobile-container">
         <!-- 顶部用户信息条 -->
         <div class="top-user-bar">
             <div class="user-info">
-                <span class="user-avatar">👤</span>
+                <span class="user-avatar"></span>
                 <span class="user-name" id="userName">加载中...</span>
             </div>
             <button class="btn-logout" onclick="logout()">退出</button>
@@ -20,7 +21,7 @@
         <!-- AI背景标题区域 -->
         <div class="hero-bg">
             <div class="hero-content">
-                <h1 class="hero-title">🤖 AI招标助手</h1>
+                <h1 class="hero-title">AI招标助手</h1>
                 <p class="hero-subtitle">智能匹配 · 精准推荐 · 高效投标</p>
             </div>
         </div>
@@ -41,7 +42,7 @@
                     <option value="市政">市政</option>
                     <option value="桥梁">桥梁</option>
                 </select>
-                <input type="text" id="searchKeyword" placeholder="🔍 搜索..." oninput="debounceSearch()">
+                <input type="text" id="searchKeyword" placeholder="搜索..." oninput="debounceSearch()">
             </div>
         </div>
 
@@ -49,12 +50,12 @@
         <div class="status-filter-bar">
             <div class="status-filter-scroll" id="statusFilterBar">
                 <span class="status-filter-tag active" data-status="" onclick="toggleStatusFilter(this)">全部</span>
-                <span class="status-filter-tag" data-status="新推送" onclick="toggleStatusFilter(this)">🆕 新推送</span>
-                <span class="status-filter-tag" data-status="已查看" onclick="toggleStatusFilter(this)">👁️ 已查看</span>
-                <span class="status-filter-tag" data-status="感兴趣" onclick="toggleStatusFilter(this)">🐻 感兴趣</span>
-                <span class="status-filter-tag" data-status="决定投标" onclick="toggleStatusFilter(this)">📋 决定投标</span>
-                <span class="status-filter-tag" data-status="已投标" onclick="toggleStatusFilter(this)">✅ 已投标</span>
-                <span class="status-filter-tag" data-status="已放弃" onclick="toggleStatusFilter(this)">❌ 已放弃</span>
+                <span class="status-filter-tag" data-status="新推送" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#2196f3"><circle cx="12" cy="12" r="8"/></svg>新推送</span>
+                <span class="status-filter-tag" data-status="已查看" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#ff9800"><circle cx="12" cy="12" r="8"/></svg>已查看</span>
+                <span class="status-filter-tag" data-status="感兴趣" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#4caf50"><circle cx="12" cy="12" r="8"/></svg>感兴趣</span>
+                <span class="status-filter-tag" data-status="决定投标" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#e91e63"><circle cx="12" cy="12" r="8"/></svg>决定投标</span>
+                <span class="status-filter-tag" data-status="已投标" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#9c27b0"><circle cx="12" cy="12" r="8"/></svg>已投标</span>
+                <span class="status-filter-tag" data-status="已放弃" onclick="toggleStatusFilter(this)"><svg class="filter-icon" viewBox="0 0 24 24" fill="#999"><circle cx="12" cy="12" r="8"/></svg>已放弃</span>
             </div>
         </div>
 
