@@ -151,9 +151,20 @@ body {
   white-space: nowrap;
   cursor: pointer;
   transition: all 0.2s;
-  background: rgba(0,0,0,0.05);
-  color: #444;
-  border: 1px solid rgba(0,0,0,0.12);
+  background: #fff;
+  color: #555;
+  border: 1px solid #e0e0e5;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.status-filter-tag .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 .status-filter-tag:active {
@@ -161,11 +172,15 @@ body {
 }
 
 .status-filter-tag.active {
-  background: rgba(255,255,255,0.95);
-  color: #1a1a2e;
-  border-color: rgba(255,255,255,0.95);
+  background: #667eea;
+  color: #fff;
+  border-color: #667eea;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+}
+
+.status-filter-tag.active .dot {
+  background: #fff !important;
 }
 
 /* ========== 筛选卡片优化 ========== */
@@ -381,14 +396,23 @@ body {
 .tender-tag {
   display: inline-flex;
   align-items: center;
+  gap: 4px;
   padding: 3px 8px;
   border-radius: 4px;
   font-size: 11px;
   font-weight: 500;
   border: 1px solid;
-  background: rgba(102, 126, 234, 0.1);
+  background: rgba(102, 126, 234, 0.08);
   color: #555;
-  border-color: rgba(102, 126, 234, 0.3);
+  border-color: rgba(102, 126, 234, 0.2);
+}
+
+.tender-tag .tag-icon {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
 /* 时间信息样式 */
