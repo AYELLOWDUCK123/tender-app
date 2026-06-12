@@ -362,6 +362,12 @@ async function register() {
     const password = document.getElementById('reg-password').value.trim();
     const company = document.getElementById('reg-company').value.trim();
 
+    // 验证：用户名和手机号至少填一个
+    if (!username && !phone) {
+        showMessage('请填写用户名或手机号（至少填一个）', 'error');
+        return;
+    }
+
     if (!password || password.length < 6) {
         showMessage('密码至少6位', 'error');
         return;
