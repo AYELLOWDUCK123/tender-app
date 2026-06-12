@@ -1,0 +1,332 @@
+const fs = require('fs');
+const path = require('path');
+const bcrypt = require('bcryptjs');
+
+const DATA_DIR = path.join(__dirname, 'data');
+if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+
+const USERS_FILE = path.join(DATA_DIR, 'users.json');
+const TENDERS_FILE = path.join(DATA_DIR, 'tenders.json');
+const USER_TENDERS_FILE = path.join(DATA_DIR, 'user_tenders.json');
+
+// 腾讯文档配置
+const TENCENT_DOC = {
+  file_id: 'DfIOGHtHeUlD',
+  sheet_id: 'BB08J2'
+};
+
+// ========== 初始化 ==========
+function initDataFiles() {
+  if (!fs.existsSync(USERS_FILE)) fs.writeFileSync(USERS_FILE, '[]');
+  if (!fs.existsSync(TENDERS_FILE)) fs.writeFileSync(TENDERS_FILE, '[]');
+  if (!fs.existsSync(USER_TENDERS_FILE)) fs.writeFileSync(USER_TENDERS_FILE, '[]');
+
+  // 创建测试账号
+  const users = readData(USERS_FILE);
+  if (users.length === 0) {
+    const testUser = createUser({ username: 'test', password: '123456', phone: '13800138000', company_name: '测试工程公司' });
+    console.log('已创建测试账号: test / 123456，手机号: 13800138000');
+  }
+
+  // 创建测试招标数据（如果没有）
+  const tenders = readData(TENDERS_FILE);
+  if (tenders.length === 0) {
+    const testTenders = [
+      {
+        title: 'XX市2026年路面改造工程',
+        budget: 280,
+        region: '江苏',
+        project_type: '路面',
+        publish_date: '2026-06-08',
+        deadline: '2026-06-25',
+        submit_start_date: '2026-06-10',
+        submit_deadline: '2026-06-24',
+        bid_open_time: '2026-06-26 09:30',
+        qualifications: '市政公用工程施工总承包一级',
+        match_score: 95,
+        source_url: 'https://example.com/tender/001',
+        section_summary: '市区主干道路面翻新改造，全长3.2公里，含排水设施升级'
+      },
+      {
+        title: 'XX高速公路桥墩加固项目',
+        budget: 350,
+        region: '浙江',
+        project_type: '桥墩',
+        publish_date: '2026-06-07',
+        deadline: '2026-06-23',
+        submit_start_date: '2026-06-10',
+        submit_deadline: '2026-06-22',
+        bid_open_time: '2026-06-24 10:00',
+        qualifications: '桥梁工程专业承包一级',
+        match_score: 88,
+        source_url: 'https://example.com/tender/002',
+        section_summary: '高速路段桥墩加固维修，涉及12个桥墩，工期180天'
+      },
+      {
+        title: 'XX新区市政道路建设工程',
+        budget: 180,
+        region: '上海',
+        project_type: '市政',
+        publish_date: '2026-06-09',
+        deadline: '2026-06-22',
+        submit_start_date: '2026-06-11',
+        submit_deadline: '2026-06-21',
+        bid_open_time: '2026-06-23 14:00',
+        qualifications: '市政公用工程施工总承包二级及以上',
+        match_score: 92,
+        source_url: 'https://example.com/tender/003',
+        section_summary: '新区市政道路建设，全长2.8公里，含绿化带和人行道'
+      },
+      {
+        title: 'XX大桥维修加固工程',
+        budget: 420,
+        region: '江苏',
+        project_type: '桥梁',
+        publish_date: '2026-06-06',
+        deadline: '2026-06-28',
+        submit_start_date: '2026-06-12',
+        submit_deadline: '2026-06-27',
+        bid_open_time: '2026-06-29 09:00',
+        qualifications: '桥梁工程专业承包一级',
+        match_score: 78,
+        source_url: 'https://example.com/tender/004',
+        section_summary: '大桥主桥及引桥维修加固，更换支座，重新铺装桥面'
+      },
+      {
+        title: 'XX工业园区路面铺设项目',
+        budget: 150,
+        region: '浙江',
+        project_type: '路面',
+        publish_date: '2026-06-09',
+        deadline: '2026-06-20',
+        submit_start_date: '2026-06-11',
+        submit_deadline: '2026-06-19',
+        bid_open_time: '2026-06-21 09:00',
+        qualifications: '市政公用工程施工总承包三级及以上',
+        match_score: 98,
+        source_url: 'https://example.com/tender/005',
+        section_summary: '工业园区内部道路铺设，面积约12000平方米'
+      }
+    ];
+
+    testTenders.forEach(t => {
+      const tender = addTender(t);
+      assignTenderToAllUsers(tender.id);
+    });
+    console.log('已创建 5 条测试招标数据');
+  }
+}
+
+// ========== 工具函数 ==========
+function readData(filePath) {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch (e) {
+    return [];
+  }
+}
+
+function writeData(filePath, data) {
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+}
+
+// ========== 用户管理 ==========
+function createUser({ username, password, phone = '', company_name = '' }) {
+  const users = readData(USERS_FILE);
+  const salt = bcrypt.genSaltSync(10);
+  const user = {
+    id: users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1,
+    username: username || '',
+    password: bcrypt.hashSync(password, salt),
+    phone: phone || '',
+    company_name: company_name || '',
+    create_time: new Date().toISOString()
+  };
+  users.push(user);
+  writeData(USERS_FILE, users);
+  return user;
+}
+
+function findUserByUsername(username) {
+  return readData(USERS_FILE).find(u => u.username === username);
+}
+
+function findUserByPhone(phone) {
+  return readData(USERS_FILE).find(u => u.phone === phone);
+}
+
+function findUserById(id) {
+  return readData(USERS_FILE).find(u => u.id === id);
+}
+
+// ========== 招标管理 ==========
+function addTender({ title, budget, region, project_type, publish_date, deadline, submit_start_date, submit_deadline, bid_open_time, qualifications, match_score, source_url, section_summary }) {
+  const tenders = readData(TENDERS_FILE);
+  const tender = {
+    id: tenders.length > 0 ? Math.max(...tenders.map(t => t.id)) + 1 : 1,
+    title,
+    budget: budget || 0,
+    region: region || '',
+    project_type: project_type || '',
+    publish_date: publish_date || '',
+    deadline: deadline || '',
+    submit_start_date: submit_start_date || '',
+    submit_deadline: submit_deadline || '',
+    bid_open_time: bid_open_time || '',
+    qualifications: qualifications || '',
+    match_score: match_score || 0,
+    source_url: source_url || '',
+    section_summary: section_summary || '',
+    add_time: new Date().toISOString()
+  };
+  tenders.push(tender);
+  writeData(TENDERS_FILE, tenders);
+  return tender;
+}
+
+function getAllTenders() {
+  return readData(TENDERS_FILE).sort((a, b) => new Date(b.add_time) - new Date(a.add_time));
+}
+
+function getTenderById(id) {
+  return readData(TENDERS_FILE).find(t => t.id === id);
+}
+
+// ========== 用户招标关联 ==========
+function assignTenderToUser(tenderId, userId) {
+  const assignments = readData(USER_TENDERS_FILE);
+  // 避免重复分配
+  if (assignments.find(a => a.user_id === userId && a.tender_id === tenderId)) {
+    return { success: false, message: '已分配' };
+  }
+  assignments.push({
+    user_id: userId,
+    tender_id: tenderId,
+    status: '新推送',
+    remark: '',
+    create_time: new Date().toISOString()
+  });
+  writeData(USER_TENDERS_FILE, assignments);
+
+  // 同步到腾讯文档（带用户手机号）
+  const tender = getTenderById(tenderId);
+  const user = findUserById(userId);
+  if (tender && user) {
+    syncTenderToTencentDoc(tender, user);
+  }
+
+  return { success: true };
+}
+
+function assignTenderToAllUsers(tenderId) {
+  const users = readData(USERS_FILE);
+  users.forEach(user => {
+    assignTenderToUser(tenderId, user.id);
+  });
+}
+
+function getUserTenders(userId, filters = {}) {
+  const assignments = readData(USER_TENDERS_FILE);
+  const tenders = readData(TENDERS_FILE);
+
+  let result = assignments
+    .filter(a => a.user_id === userId)
+    .map(a => {
+      const tender = tenders.find(t => t.id === a.tender_id);
+      if (!tender) return null;
+      return {
+        ...tender,
+        user_status: a.status,
+        remark: a.remark,
+        assign_time: a.create_time
+      };
+    })
+    .filter(Boolean);
+
+  if (filters.status) result = result.filter(r => r.user_status === filters.status);
+  if (filters.region) result = result.filter(r => r.region === filters.region);
+  if (filters.project_type) result = result.filter(r => r.project_type === filters.project_type);
+  if (filters.keyword) result = result.filter(r => r.title.includes(filters.keyword));
+
+  // 按创建/添加时间逆序排列
+  result.sort((a, b) => new Date(b.add_time) - new Date(a.add_time));
+  return result;
+}
+
+function updateTenderStatus(userId, tenderId, status, remark = null) {
+  const assignments = readData(USER_TENDERS_FILE);
+  const index = assignments.findIndex(a => a.user_id === userId && a.tender_id === tenderId);
+
+  if (index === -1) return { success: false, message: '未找到记录' };
+
+  assignments[index].status = status;
+  if (remark !== null) assignments[index].remark = remark;
+  writeData(USER_TENDERS_FILE, assignments);
+  return { success: true };
+}
+
+// ========== 腾讯文档同步函数 ==========
+function syncTenderToTencentDoc(tender, user) {
+  const FILE_ID = TENCENT_DOC.file_id;
+  const SHEET_ID = TENCENT_DOC.sheet_id;
+
+  // 读取同步队列，确定写入行（追加到末尾）
+  const queueFile = path.join(DATA_DIR, 'sync_queue.json');
+  let queue = [];
+  if (fs.existsSync(queueFile)) {
+    try { queue = JSON.parse(fs.readFileSync(queueFile, 'utf8')); } catch (e) { queue = []; }
+  }
+
+  const row = 1 + queue.length; // 表头占第0行，数据从第1行开始
+
+  const cols = [
+    { col: 0, value: tender.id, type: 'NUMBER' },
+    { col: 1, value: tender.title, type: 'STRING' },
+    { col: 2, value: tender.budget || 0, type: 'NUMBER' },
+    { col: 3, value: tender.region || '', type: 'STRING' },
+    { col: 4, value: tender.project_type || '', type: 'STRING' },
+    { col: 5, value: tender.publish_date || '', type: 'STRING' },
+    { col: 6, value: tender.deadline || '', type: 'STRING' },
+    { col: 7, value: tender.qualifications || '', type: 'STRING' },
+    { col: 8, value: tender.match_score || 0, type: 'NUMBER' },
+    { col: 9, value: tender.source_url || '', type: 'STRING' },
+    { col: 10, value: '新推送', type: 'STRING' },
+    { col: 11, value: (tender.add_time || '').slice(0, 19).replace('T', ' '), type: 'STRING' },
+    // 第12列：用户手机号
+    { col: 12, value: user.phone || '', type: 'STRING' },
+    // 新增字段
+    { col: 13, value: tender.section_summary || '', type: 'STRING' },
+    { col: 14, value: tender.submit_start_date || '', type: 'STRING' },
+    { col: 15, value: tender.submit_deadline || '', type: 'STRING' },
+    { col: 16, value: tender.bid_open_time || '', type: 'STRING' },
+  ];
+
+  queue.push({
+    file_id: FILE_ID,
+    sheet_id: SHEET_ID,
+    row: row,
+    cols: cols,
+    tender_id: tender.id,
+    user_phone: user.phone
+  });
+
+  fs.writeFileSync(queueFile, JSON.stringify(queue, null, 2));
+  console.log(`[腾讯文档同步] 已加入队列: ${tender.title} (用户: ${user.phone})`);
+}
+
+module.exports = {
+  initDataFiles,
+  createUser,
+  findUserByUsername,
+  findUserByPhone,
+  findUserById,
+  addTender,
+  getAllTenders,
+  getTenderById,
+  assignTenderToUser,
+  getUserTenders,
+  updateTenderStatus,
+  assignTenderToAllUsers,
+  syncTenderToTencentDoc,
+  TENCENT_DOC
+};
