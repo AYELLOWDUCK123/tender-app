@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <!-- 鸭子身体 -->
+  <ellipse cx="50" cy="65" rx="32" ry="25" fill="#FFC107"/>
+  
+  <!-- 鸭子头部 -->
+  <circle cx="50" cy="35" r="18" fill="#FFC107"/>
+  
+  <!-- 鸭子眼睛 -->
+  <circle cx="44" cy="30" r="3" fill="#333"/>
+  <circle cx="56" cy="30" r="3" fill="#333"/>
+  
+  <!-- 鸭子嘴巴 -->
+  <ellipse cx="50" cy="40" rx="6" ry="3" fill="#FF5722"/>
+  
+  <!-- 鸭子翅膀 -->
+  <ellipse cx="65" cy="60" rx="12" ry="8" fill="#FFA000" transform="rotate(-20 65 60)"/>
+  
+  <!-- 鸭子脚 -->
+  <ellipse cx="42" cy="88" rx="6" ry="3" fill="#FF5722"/>
+  <ellipse cx="58" cy="88" rx="6" ry="3" fill="#FF5722"/>
+  
+  <!-- 中标标志（星星）-->
+  <text x="75" y="25" font-size="16" fill="#FF5722">★</text>
+</svg>
