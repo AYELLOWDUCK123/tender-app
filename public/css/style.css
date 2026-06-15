@@ -18,20 +18,18 @@ body {
   min-height: 100vh;
 }
 
-/* ========== 顶部AI背景区域 ========== */
+/* ========== 顶部Hero区域 ========== */
 .header-hero {
   position: relative;
   overflow: hidden;
 }
 
-/* 登录页 logo */
 .logo-img {
   width: 64px;
   height: 64px;
   margin-bottom: 8px;
 }
 
-/* 仪表盘 hero logo */
 .hero-logo {
   width: 40px;
   height: 40px;
@@ -42,364 +40,240 @@ body {
   position: relative;
   background: linear-gradient(135deg, #FFC107 0%, #FF9800 40%, #F57C00 70%, #E65100 100%);
   padding: 35px 15px 15px;
-  position: relative;
   overflow: hidden;
 }
 
-/* 神经网络背景图案 */
 .hero-bg::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
+  background-image:
     radial-gradient(circle at 20% 30%, rgba(255,255,255,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 0%, transparent 50%),
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,0.15) 0%, transparent 60%);
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.3) 0%, transparent 50%);
   z-index: 0;
 }
 
-/* AI网格线条 */
 .hero-bg::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: 
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 30px 30px;
   z-index: 0;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 1;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .hero-title {
-  font-size: 26px;
-  color: white;
+  font-size: 22px;
   font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  letter-spacing: 3px;
+  margin-bottom: 5px;
 }
 
 .hero-subtitle {
-  font-size: 13px;
+  font-size: 12px;
   color: rgba(255,255,255,0.85);
   letter-spacing: 2px;
 }
 
-/* ========== 顶部用户信息条 ========== */
+/* ========== 顶部用户栏 ========== */
 .top-user-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 15px;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  position: relative;
-  z-index: 20;
-}
-
-.top-user-bar .user-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.top-user-bar .user-avatar {
-  font-size: 20px;
-}
-
-.top-user-bar .user-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.9);
-}
-
-.top-user-bar .btn-logout {
-  padding: 4px 12px;
-  background: rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.85);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 6px;
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.top-user-bar .btn-logout:active {
-  background: rgba(255,255,255,0.3);
-}
-
-/* ========== 状态筛选标签栏 ========== */
-.status-filter-bar {
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  padding: 8px 0;
-  margin: 0 12px;
-}
-
-.status-filter-scroll {
-  display: flex;
-  gap: 6px;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
-  padding: 0 4px;
-}
-
-.status-filter-scroll::-webkit-scrollbar {
-  display: none; /* Chrome/Safari/Opera */
-}
-
-.status-filter-tag {
-  flex-shrink: 0;
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 500;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all 0.2s;
+  padding: 12px 16px;
   background: #fff;
-  color: #555;
-  border: 1px solid #e0e0e5;
-  display: inline-flex;
+  border-bottom: 1px solid #eee;
+}
+
+.user-info {
+  display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
 }
 
-.status-filter-tag .dot {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
+.user-avatar {
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.status-filter-tag:active {
-  transform: scale(0.96);
-}
-
-.status-filter-tag.active {
-  background: #FFC107;
+  background: linear-gradient(135deg, #FFC107, #FF9800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #fff;
-  border-color: #FFC107;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.user-name {
+  font-size: 14px;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(102,126,234,0.3);
+  color: #333;
 }
 
-.status-filter-tag.active .dot {
-  background: #fff !important;
+.btn-logout {
+  padding: 5px 14px;
+  border-radius: 16px;
+  border: none;
+  background: #fff3e0;
+  color: #F57C00;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* ========== 筛选卡片优化 ========== */
+/* ========== 筛选卡片 ========== */
 .filter-card {
-  position: relative;
-  z-index: 10;
-  background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255,255,255,0.3);
-  border-radius: 14px;
-  padding: 10px 10px;
-  margin: 8px 12px 0;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  background: #fff;
+  margin: 12px 12px 8px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 12px;
 }
 
 .filter-row {
   display: flex;
   gap: 8px;
-  margin-bottom: 8px;
 }
 
-.filter-row:last-child {
-  margin-bottom: 0;
+.three-col {
+  display: flex;
+  gap: 8px;
 }
 
-/* 三列布局：地区、类型、搜索 */
-.filter-row.three-col {
-  gap: 6px;
-}
-
-.filter-row.three-col select {
+.three-col > * {
   flex: 1;
   min-width: 0;
 }
 
-.filter-row.three-col input {
-  flex: 0 0 100px;
-  min-width: 100px;
-}
-
-.filter-row select,
-.filter-row input {
-  padding: 9px 22px 9px 8px;
+select, input[type="text"] {
+  width: 100%;
+  padding: 8px 10px;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
-  font-size: 12px;
-  color: #333;
-  background: white;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6' fill='%23999'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 6px center;
-  transition: all 0.2s;
-}
-
-.filter-row select:focus,
-.filter-row input:focus {
+  font-size: 13px;
   outline: none;
-  border-color: #FFC107;
-  box-shadow: 0 0 0 2px rgba(102,126,234,0.15);
-}
-
-.filter-row select option {
-  background: white;
+  background: #fafafa;
   color: #333;
 }
 
-.filter-row input::placeholder {
-  color: #999;
-  font-size: 11px;
+select:focus, input:focus {
+  border-color: #FFC107;
+  background: #fff;
 }
 
-.filter-row input {
-  background-image: none;
-  padding-right: 8px;
+/* ========== 状态筛选标签栏 ========== */
+.status-filter-bar {
+  background: #fff;
+  border-bottom: 1px solid #eee;
+  padding: 10px 0;
+  margin: 0 12px;
 }
 
-/* ========== 卡片标题行 ========== */
-.title-row {
+.status-filter-scroll {
   display: flex;
-  align-items: center;
   gap: 8px;
-  width: 100%;
+  overflow-x: auto;
+  padding: 0 4px;
+  -webkit-overflow-scrolling: touch;
 }
 
-.title-row .tender-title {
-  flex: 1;
-  font-size: 14px;
-  font-weight: 600;
-  color: #222;
-  line-height: 1.4;
-  min-width: 0;
+.status-filter-scroll::-webkit-scrollbar {
+  display: none;
 }
 
-.title-row .tender-status {
+.status-filter-tag {
   flex-shrink: 0;
-}
-
-.view-source-btn {
-  flex-shrink: 0;
-  padding: 3px 8px;
-  border-radius: 6px;
-  font-size: 10px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
   font-weight: 500;
-  text-decoration: none;
   white-space: nowrap;
-  background: rgba(102,126,234,0.1);
-  color: #FFC107;
-  border: 1px solid rgba(102,126,234,0.3);
-  transition: all 0.2s;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f5f5f5;
+  color: #666;
+  border: 1px solid #e8e8e8;
 }
 
-.view-source-btn:active {
-  background: #FFC107;
-  color: white;
+.status-filter-tag:hover {
+  background: #eee;
+}
+
+.status-filter-tag.active {
+  background: linear-gradient(135deg, #FFC107, #FF9800);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 2px 6px rgba(255,152,0,0.25);
 }
 
 /* ========== 招标列表 ========== */
 .tender-list {
-  padding: 0 12px 15px;
-  background: white;
-  margin: 0 12px;
-  border-radius: 0 0 12px 12px;
-}
-
-/* 空状态 */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: #999;
-}
-
-.empty-icon {
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.empty-state p {
-  font-size: 14px;
-}
-
-/* ========== 招标卡片 ========== */
-.tender-card {
-  background: #f8f9fb;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 8px;
-  transition: all 0.2s;
-  border: 1px solid #eef0f5;
-}
-
-.tender-card:active {
-  transform: scale(0.99);
-  background: #f0f1f5;
-}
-
-/* 卡片头部 */
-.card-header {
+  padding: 0 12px 80px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.tender-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 14px;
+  animation: slideUp 0.35s ease-out both;
+}
+
+.card-header {
   margin-bottom: 8px;
+}
+
+.title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .tender-title {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 600;
+  line-height: 1.4;
   color: #222;
   flex: 1;
-  margin-right: 8px;
-  line-height: 1.4;
 }
 
 .tender-status {
-  padding: 3px 8px;
-  border-radius: 10px;
-  font-size: 10px;
+  flex-shrink: 0;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
   font-weight: 600;
   white-space: nowrap;
+}
+
+.view-source-btn {
   flex-shrink: 0;
+  font-size: 11px;
+  color: #FF9800;
+  text-decoration: none;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-top: 4px;
 }
 
-/* 状态颜色 */
-.status-新推送 { background: #e8f4fd; color: #1976d2; }
-.status-已查看 { background: #fff8e1; color: #f57c00; }
-.status-感兴趣 { background: #e8f5e9; color: #388e3c; }
-.status-决定投标 { background: #fce4ec; color: #c2185b; }
-.status-已投标 { background: #f3e5f5; color: #7b1fa2; }
-.status-已放弃 { background: #f5f5f5; color: #999; }
-
-/* 标段摘要 */
-.section-summary {
-  background: white;
-  border-radius: 8px;
-  padding: 8px 10px;
-  margin-bottom: 8px;
-  font-size: 12px;
-  color: #555;
-  line-height: 1.5;
-  border-left: 3px solid #FFC107;
-}
-
-/* 标签样式 */
+/* ========== 标签 ========== */
 .tender-tags {
   display: flex;
   flex-wrap: wrap;
@@ -416,12 +290,12 @@ body {
   font-size: 11px;
   font-weight: 500;
   border: 1px solid;
-  background: rgba(255, 193, 7, 0.08);
+  background: rgba(255,193,7,0.08);
   color: #555;
-  border-color: rgba(255, 193, 7, 0.2);
+  border-color: rgba(255,193,7,0.2);
 }
 
-.tender-tag .tag-icon {
+.tag-icon {
   display: inline-block;
   width: 5px;
   height: 5px;
@@ -429,244 +303,180 @@ body {
   flex-shrink: 0;
 }
 
-/* 时间信息样式 */
-.time-info {
-  margin-bottom: 10px;
+/* ========== 标段摘要 ========== */
+.section-summary {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
   padding: 8px;
-  background: white;
-  border-radius: 8px;
+  background: #fafafa;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  border-left: 3px solid #FFC107;
+}
+
+/* ========== 时间信息 ========== */
+.time-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 8px;
+  border-top: 1px solid #f0f0f0;
 }
 
 .time-item {
   display: flex;
   align-items: center;
-  margin-bottom: 4px;
+  gap: 6px;
   font-size: 12px;
-}
-
-.time-item:last-child {
-  margin-bottom: 0;
+  color: #777;
 }
 
 .time-label {
   color: #999;
-  margin-right: 5px;
   white-space: nowrap;
-  font-size: 11px;
 }
 
 .time-value {
-  color: #333;
-  font-weight: 500;
-  font-size: 12px;
+  color: #555;
 }
 
-/* 信息网格 - 短字段一行2个 */
-.info-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  margin-bottom: 8px;
+.card-divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 10px 0;
 }
 
-.info-item {
-  background: white;
-  border-radius: 8px;
-  padding: 5px 6px;
-}
-
-.info-label {
-  font-size: 10px;
-  color: #999;
-  margin-bottom: 2px;
-}
-
-.info-value {
-  font-size: 12px;
-  color: #333;
-  font-weight: 500;
-}
-
-/* 预算特殊颜色 */
-.info-budget .info-value {
-  color: #f44336;
-  font-weight: 700;
-}
-
-/* 链接 */
-.tender-link {
-  display: block;
-  text-align: center;
-  padding: 7px;
-  background: white;
-  border-radius: 8px;
-  color: #FFC107;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 500;
-  transition: all 0.2s;
-  margin-top: 8px;
-  border: 1px solid #e8e9ec;
-}
-
-.tender-link:active {
-  background: #FFC107;
-  color: white;
-}
-
-/* 操作按钮 */
-.card-actions {
+/* ========== 操作按钮 ========== */
+.action-bar {
   display: flex;
   gap: 6px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
 }
 
 .action-btn {
   flex: 1;
-  padding: 6px 4px;
-  border: 1px solid #ddd;
-  background: white;
-  border-radius: 6px;
-  font-size: 11px;
+  min-width: calc(33.333% - 4px);
+  padding: 7px 0;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  text-align: center;
   color: #555;
 }
 
-.action-btn:active {
-  background: #FFC107;
-  color: white;
-  border-color: #FFC107;
+.action-btn:hover {
+  background: #fafafa;
+  border-color: #ddd;
 }
 
-/* 状态操作区域 */
-.status-actions {
-  display: flex;
-  gap: 5px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
-
-.status-btn {
-  padding: 4px 8px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.08);
-  border-radius: 6px;
-  font-size: 10px;
-  color: #555;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.status-btn:active {
-  background: #FFC107;
-  color: white;
-  border-color: #FFC107;
-}
-
-/* 加载状态 */
+/* ========== 加载/空状态 ========== */
 .loading {
   text-align: center;
-  padding: 40px 20px;
-  color: #999;
-  font-size: 13px;
+  padding: 60px 20px;
+  color: #aaa;
 }
 
 .loading-spinner {
-  width: 28px;
-  height: 28px;
-  border: 3px solid #e8e9ec;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #f0f0f0;
   border-top-color: #FFC107;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin: 0 auto 12px;
 }
 
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #bbb;
+}
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* 分割线 */
-.card-divider {
-  height: 1px;
-  background: #eef0f5;
-  margin: 8px 0;
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
 }
 
-/* ========== 登录页面样式 ========== */
+/* ========== 登录页 ========== */
 .login-container {
-  max-width: 420px;
+  max-width: 400px;
   margin: 0 auto;
   min-height: 100vh;
-  background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #f5f6fa 50%, #f5f6fa 100%);
   display: flex;
   flex-direction: column;
 }
 
 .login-hero {
-  padding: 60px 20px 40px;
+  background: linear-gradient(135deg, #FFC107 0%, #FF9800 40%, #F57C00 70%, #E65100 100%);
+  padding: 60px 24px 40px;
   text-align: center;
-  color: white;
+  color: #fff;
 }
 
 .login-hero h1 {
   font-size: 28px;
   font-weight: 700;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  letter-spacing: 4px;
+  margin-bottom: 10px;
 }
 
 .login-hero p {
-  font-size: 13px;
-  color: rgba(255,255,255,0.8);
-  letter-spacing: 2px;
+  font-size: 14px;
+  opacity: 0.9;
+  letter-spacing: 1px;
 }
 
-.login-card {
+.login-body {
   flex: 1;
-  background: white;
-  border-radius: 24px 24px 0 0;
-  padding: 30px 24px;
-  margin-top: -20px;
-  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  padding: 24px;
 }
 
-.login-tabs {
+/* ========== 登录页Tab切换 ========== */
+.tab-switcher {
   display: flex;
-  gap: 0;
+  background: #f0f0f0;
+  border-radius: 25px;
+  padding: 3px;
   margin-bottom: 24px;
-  background: #f5f6fa;
-  border-radius: 12px;
-  padding: 4px;
 }
 
-.login-tab {
+.tab-btn {
   flex: 1;
   padding: 10px;
   border: none;
   background: transparent;
-  border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
-  color: #999;
+  color: #888;
+  border-radius: 22px;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
+  outline: none;
 }
 
-.login-tab.active {
-  background: white;
-  color: #1a1a2e;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+.tab-btn.active {
+  background: #fff;
+  color: #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+/* ========== 登录页输入框 ========== */
 .login-input-group {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .login-input-group label {
   display: block;
-  font-size: 12px;
+  font-size: 13px;
   color: #666;
   margin-bottom: 6px;
   font-weight: 500;
@@ -675,63 +485,90 @@ body {
 .login-input-group input {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #e8e9ec;
+  border: 1.5px solid #e8e8e8;
   border-radius: 10px;
   font-size: 14px;
-  color: #333;
-  background: #f8f9fb;
+  outline: none;
   transition: all 0.2s;
 }
 
 .login-input-group input:focus {
-  outline: none;
   border-color: #FFC107;
-  background: white;
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  box-shadow: 0 0 0 3px rgba(255,193,7,0.15);
 }
 
-.login-input-group input::placeholder {
-  color: #bbb;
-}
-
+/* ========== 登录页按钮 ========== */
 .login-btn {
   width: 100%;
   padding: 14px;
-  background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
-  color: white;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #FFC107, #FF9800);
+  color: #fff;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s;
+  letter-spacing: 2px;
   margin-top: 8px;
-  box-shadow: 0 4px 12px rgba(102,126,234,0.3);
 }
 
-.login-btn:active {
-  transform: translateY(1px);
-  box-shadow: 0 2px 6px rgba(102,126,234,0.3);
+.login-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,152,0,0.3);
 }
 
-.login-message {
+/* ========== 消息提示 ========== */
+.msg-tip {
   text-align: center;
   padding: 10px;
   border-radius: 8px;
   font-size: 13px;
   margin-top: 12px;
-  transition: all 0.3s;
-  opacity: 0;
+  display: none;
 }
 
-.login-message.error {
-  background: #ffebee;
-  color: #c62828;
-  opacity: 1;
+.msg-tip.error {
+  display: block;
+  background: #fff5f5;
+  color: #e74c3c;
 }
 
-.login-message.success {
-  background: #e8f5e9;
-  color: #2e7d32;
-  opacity: 1;
+.msg-tip.success {
+  display: block;
+  background: #f0fff4;
+  color: #27ae60;
 }
+
+/* ========== SVG图标 ========== */
+.filter-icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.source-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.qual-icon {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+}
+
+.time-icon {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+
+/* ========== 状态标签颜色 ========== */
+.status-新推送 { background: #e3f2fd; color: #1565c0; }
+.status-已查看 { background: #fff3e0; color: #e65100; }
+.status-感兴趣 { background: #e8f5e9; color: #2e7d32; }
+.status-决定投标 { background: #fce4ec; color: #c2185b; }
+.status-已投标 { background: #f3e5f5; color: #7b1fa2; }
+.status-已放弃 { background: #eeeeee; color: #757575; }
