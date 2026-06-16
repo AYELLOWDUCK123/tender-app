@@ -216,14 +216,14 @@ function createTenderCard(t) {
             <div class="title-row">
                 <span class="tender-title">${escHtml(t.title)}</span>
                 <span class="tender-status ${statusClass}">${escHtml(t.user_status)}</span>
-                ${t.source_url ? `<a href="${escHtml(t.source_url)}" target="_blank" class="view-source-btn"><svg class="source-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>查看原文</a>` : ''}
+                ${t.source_url ? `<a href="${escHtml(t.source_url)}" target="_blank" class="view-source-btn"><svg class="source-icon" viewBox="0 0 24 24" fill="#FF9800"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>查看原文</a>` : ''}
             </div>
         </div>
 
         <!-- 标签区域：地区、类型、匹配度、预算 -->
         <div class="tender-tags">
-            <span class="tender-tag tag-region"><svg class="tag-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>${escHtml(t.region)}</span>
-            <span class="tender-tag tag-type"><svg class="tag-icon" viewBox="0 0 24 24" fill="#667eea"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></svg>${escHtml(t.project_type)}</span>
+            <span class="tender-tag tag-region"><svg class="tag-icon" viewBox="0 0 24 24" fill="#FFC107"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>${escHtml(t.region)}</span>
+            <span class="tender-tag tag-type"><svg class="tag-icon" viewBox="0 0 24 24" fill="#FFC107"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8l8 5 8-5v10zm-8-7L4 6h16l-8 5z"/></svg>${escHtml(t.project_type)}</span>
             <span class="tender-tag tag-match"><svg class="tag-icon" viewBox="0 0 24 24" fill="${matchColor}"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>${t.match_score}分</span>
             <span class="tender-tag tag-budget"><svg class="tag-icon" viewBox="0 0 24 24" fill="${budgetColor}"><path d="M11.8 10.9c-2.34-1.95-4.71-4.44-4.71-6.7C7.09 2.63 9.06 1 11.51 1c1.95 0 3.49 1.14 3.49 3.21 0 2.93-4.09 5.71-4.71 6.69zM13 20.5c-1.29 1.09-3.36 2.5-5 2.5-2.76 0-5.06-2.29-5.06-5.12 0-2.57 2.36-4.29 4.72-6.03 2.14 1.57 3.69 3.25 4.69 4.67 1.01-1.43 2.56-3.12 4.7-4.7 2.36 1.74 4.71 3.46 4.71 6.03 0 2.83-2.3 5.12-5.06 5.12-1.64 0-3.71-1.41-5-2.5z"/></svg>${t.budget}万</span>
         </div>
@@ -290,12 +290,12 @@ function getStatusButtons(currentStatus, tenderId) {
 
     return options.map(s => {
         const colors = {
-            '已查看': '#ff9800',
-            '感兴趣': '#4caf50',
-            '决定投标': '#e91e63',
-            '已投标': '#9c27b0',
+            '已查看': '#FF9800',
+            '感兴趣': '#4CAF50',
+            '决定投标': '#E91E63',
+            '已投标': '#9C27B0',
             '已放弃': '#999',
-            '新推送': '#2196f3'
+            '新推送': '#FFC107'
         };
         const c = colors[s] || '#ddd';
         return `<button class="status-btn" onclick="updateStatus(${tenderId}, '${s}')"
