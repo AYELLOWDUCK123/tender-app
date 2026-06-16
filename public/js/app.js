@@ -297,8 +297,9 @@ function getStatusButtons(currentStatus, tenderId) {
             '已放弃': '#999',
             '新推送': '#2196f3'
         };
-        return `<button class="status-btn" onclick="updateStatus(${tenderId}, '${s}')" 
-                style="border-color:${colors[s] || '#ddd'};color:${colors[s] || '#666'}">${s}</button>`;
+        const c = colors[s] || '#ddd';
+        return `<button class="status-btn" onclick="updateStatus(${tenderId}, '${s}')"
+                style="border-color:${c};color:${c};background:${c}12">${s}</button>`;
     }).join('');
 }
 
