@@ -347,7 +347,36 @@ select:focus, input:focus {
   margin: 10px 0;
 }
 
-/* ========== 操作按钮 ========== */
+/* ========== 卡片底部状态操作按钮 ========== */
+.status-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.status-btn {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+  white-space: nowrap;
+}
+
+.status-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* ========== 操作按钮（旧） ========== */
 .action-bar {
   display: flex;
   gap: 6px;
